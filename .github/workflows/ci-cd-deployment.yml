@@ -35,10 +35,10 @@ jobs:
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           version: latest
-          args: set image --record deployment/application container=daviduyaguarij:${{ github.sha }}
+          args: set image --record deployment container=daviduyaguarij:${{ github.sha }}
       - name: Verify deployment
         uses: myrotvorets/kubectl-action@2.0.0
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           version: latest
-          args: rollout status deployment/application
+          args: rollout status deployment
