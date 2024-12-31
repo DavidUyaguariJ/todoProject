@@ -17,6 +17,13 @@ spec:
           image: d4viduj/react-app:${{ github.sha }}
           ports:
             - containerPort: 5173
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
           readinessProbe:
             httpGet:
               path: /readiness
