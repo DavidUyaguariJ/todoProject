@@ -1,12 +1,14 @@
 name: Build, Push, and Deploy
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
     types:
       - opened
-      - synchronize
       - reopened
 
 jobs:
@@ -29,11 +31,16 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Create/Modify deployment
-        uses: gane5hvarma/kubectl-actions@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      - uses: actions/checkout@v2
+      - name: Deploy to cluster
+        uses: myrotvorets/kubectl-action@2.0.0
         with:
-          args: apply -f deployment.yaml -f loadBalancer.yaml
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          version: latest
+          args: set image --record deployment/application container=daviduyaguarij:${{ github.sha }}
+      - name: Verify deployment
+        uses: myrotvorets/kubectl-action@2.0.0
+        with:
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          version: latest
+          args: rollout status deployment/application
