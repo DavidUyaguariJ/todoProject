@@ -3,7 +3,7 @@ name: Build, Push, and Deploy
 on:
   push:
     branches: [master]
-    
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -28,4 +28,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: apply -f deployment.yaml
+          args: apply -f ../deployments/deployment.yaml
