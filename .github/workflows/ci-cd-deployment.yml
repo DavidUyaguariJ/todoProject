@@ -9,7 +9,6 @@ on:
       - master
 jobs:
   build-and-push:
-    -name: Build and push to dockerhub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
