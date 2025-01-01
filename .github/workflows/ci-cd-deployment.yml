@@ -44,3 +44,4 @@ jobs:
       with:
         config: ${{ secrets.KUBE_CONFIG_DATA }}
         command: -n kube-public rollout status deployment/todoproject
+        
