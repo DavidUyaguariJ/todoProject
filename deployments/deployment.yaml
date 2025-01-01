@@ -10,29 +10,11 @@ spec:
   template:
     metadata:
       labels:
-        app: rtodoproject
+        name: todoproject
     spec:
       containers:
-        - name: react
-          image: daviduyaguarij/todoproject:${{ github.sha }}
+        - name: todoproject
+          image: daviduyaguarij/todoproject
           ports:
-            - containerPort: 5173
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
-          readinessProbe:
-            httpGet:
-              path: /readiness
-              port: 5173
-            initialDelaySeconds: 20
-            periodSeconds: 3
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 5173
-            initialDelaySeconds: 20
-            periodSeconds: 3
+          - containerPort: 5173
+            name: http
