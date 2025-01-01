@@ -18,5 +18,3 @@ spec:
           ports:
           - containerPort: 5173
             name: http
-
-            
