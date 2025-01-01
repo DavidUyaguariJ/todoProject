@@ -31,9 +31,9 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig export KUBECONFIG=$(pwd)/kubeconfig
 
       - name: Deploy to DigitalOcean Kubernetes
-        run: kubectl apply -f todoproject/.github/deployments/deployment.yaml
+        run: kubectl apply -f todoproject/deployments/deployment.yaml
 
       - name: Deploy loadbalancer to DigitalOcean Kubernetes
-        run: kubectl apply -f todoproject/.github/deployments/loadBalancer.yaml
+        run: kubectl apply -f todoproject/deployments/loadBalancer.yaml
       - name: Verify deployment
         run: kubectl rollout status deployment/todoproject
