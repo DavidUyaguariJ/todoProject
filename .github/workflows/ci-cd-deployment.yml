@@ -34,9 +34,9 @@ jobs:
       uses: mjamaah/kubectl@master
       with:
         config_data: ${{ secrets.kube_config}}
-        args: set image --record deployments/deployment.yaml daviduyaguarij=todoproject:${{ github.sha }}
+        args: set image --record deployment/todoproject todoproject=daviduayguarij/todoproject:${{ github.sha }}
     - name: Verify deployment
       uses: mjamaah/kubectl@master
       with:
         config_data: ${{ secrets.kube_config }}
-        args: '"rollout status deployments/deployment.yaml"'
+        args: '"rollout status deployment/todoproject"'

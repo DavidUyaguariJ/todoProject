@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-app-lb
+  name: todoproject-lb
 spec:
   type: LoadBalancer
   ports:
@@ -10,4 +10,4 @@ spec:
       targetPort: 5173
       name: http
   selector:
-    app: react-app
+    app: todoproject

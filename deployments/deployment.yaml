@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-app-deployment
+  name: todoproject-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: react-app
+      app: todoproject
   template:
     metadata:
       labels:
-        app: react-app
+        app: rtodoproject
     spec:
       containers:
         - name: react
