@@ -33,10 +33,10 @@ jobs:
     - name: Deploy to cluster
       uses: mjamaah/kubectl@master
       with:
-        config_data: ${{ secrets.CONFIG_DATA}}
+        config_data: ${{ secrets.kube_config}}
         args: set image --record deployments/deployment.yaml daviduyaguarij=todoproject:${{ github.sha }}
     - name: Verify deployment
       uses: mjamaah/kubectl@master
       with:
-        config_data: ${{ secrets.CONFIG_DATA }}
+        config_data: ${{ secrets.kube_config }}
         args: '"rollout status deployments/deployment.yaml"'
