@@ -30,6 +30,11 @@ jobs:
         run: | 
           echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig export KUBECONFIG=$(pwd)/kubeconfig
 
+      - name: Debug workspace
+        run: |
+          echo "Current directory: $GITHUB_WORKSPACE"
+          ls -R $GITHUB_WORKSPACE
+          
       - name: Deploy to DigitalOcean Kubernetes
         run: kubectl apply -f $GITHUB_WORKSPACE/deployments/deployment.yaml
 
