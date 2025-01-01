@@ -26,23 +26,21 @@ jobs:
         with:
           push: true
           tags: daviduyaguarij/todoproject:${{ github.sha }}
-  deploy-to-cluster:
+  deploy:
     name: deploy to cluster
     runs-on: ubuntu-latest
     needs: docker
     steps:
-    -
-      name: deploy to cluster
+    - uses: actions/checkout@master
+    - name: deploy to cluster
       uses: steebchen/kubectl@v2.0.0
       with:
         config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: -n kube-public set image --record deployment/todoproject todoproject=daviduyaguarij/todoproject:${{ github.sha }}
-    -
-      name: verify deployment
+        command: -n kube-public set image --record deployment/todoproject container=daviduyaguarij/todoproject:${{ github.sha }}
+    - name: verify deployment
       uses: steebchen/kubectl@v2.0.0
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        KUBECTL_VERSION: "1.28"
       with:
         config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: -n kube-public rollout status deployment/todoproject
+        version: v1.21.0
+        binaries-url: "https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl"
+        command: rollout status -n kube-public deployment/todoproject
