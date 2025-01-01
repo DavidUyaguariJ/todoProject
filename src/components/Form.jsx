@@ -22,7 +22,7 @@ function Form() {
           name='activity'
         />
         <textarea
-          placeholder='Ingrese la Descripción en la que figure su actividad'
+          placeholder='Ingrese la Descripción'
           className='form-control mb-2 w-25'
           name='description'
         />
